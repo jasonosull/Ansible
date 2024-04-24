@@ -1,0 +1,14 @@
+---
+- name: Get Uptime Information
+  hosts: target_hosts
+  
+
+  tasks:
+    - name: Run Uptime Command
+      command: uptime
+      register: uptime_output
+
+    - name: Display Uptime Information
+      debug:
+        var: uptime_output.stdout_lines
+
