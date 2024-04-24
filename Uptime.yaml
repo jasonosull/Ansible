@@ -1,6 +1,6 @@
 ---
 - name: Get Uptime Information
-  hosts: target_hosts
+  hosts: all
   
 
   tasks:
