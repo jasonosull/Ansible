@@ -1,0 +1,15 @@
+- name: Create a user and configure SSH access
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create user
+      user:
+        name: Jason
+        state: present
+        shell: /bin/bash
+
+    - name: Add authorized key for the user
+      authorized_key:
+        user: Jason
+        state: present
+        key: "ssh-ed25519... user@host"
