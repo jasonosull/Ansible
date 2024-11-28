@@ -1,0 +1,49 @@
+---
+- name: Configure Firewall on Oracle Linux
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install firewalld if not installed
+      yum:
+        name: firewalld
+        state: present
+
+    - name: Start and enable firewalld service
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: Allow SSH (port 22)
+      firewalld:
+        service: ssh
+        state: enabled
+        permanent: yes
+
+    - name: Allow HTTP (port 80)
+      firewalld:
+        port: 80/tcp
+        state: enabled
+        permanent: yes
+
+    - name: Allow HTTPS (port 443)
+      firewalld:
+        port: 443/tcp
+        state: enabled
+        permanent: yes
+
+    - name: Allow Oracle Database Listener (default port 1521)
+      firewalld:
+        port: 1521/tcp
+        state: enabled
+        permanent: yes
+
+    - name: Allow custom application port (e.g., 8080)
+      firewalld:
+        port: 8080/tcp
+        state: enabled
+        permanent: yes
+
+    - name: Reload firewalld to apply changes
+      firewalld:
+        state: reloaded
