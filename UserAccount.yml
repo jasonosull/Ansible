@@ -1,3 +1,4 @@
+---
 - name: Create a user and configure SSH access
   hosts: all
   become: yes
